@@ -1,2 +1,282 @@
 # R-visualization
 How to create publication quality plots using different R libraries
+
+## Different libraries
+
+Base R can create different simple plots like scatter ,histograms,boxplots,barplots etc with limited asethetics. To enhance the athestics, elegances and to create complex plots/graphs with reproducibility we can need to use specialised libraries. There are many specialised libraries in the public domain that can be used. In this module we will look into **gggplot2** and **patchwork**.
+
+
+# [Tidyverse](https://www.tidyverse.org)
+Tidyverse is an ecosytem of R packages designed the usability of data which includes data wrangling,data manuplation,data managment and data plotting. Tidyverse achieves this by creating independent packages in its universe 
+
+**1. ggplot2 :** ggplot2 (grammer of graphics) is a R package for data visulization
+
+**2. dplyr   :** data manipulation
+
+**3. tibble  :** data managment
+
+**4: tidyr   :** data wrangling
+
+ .... and many more
+
+## 1. ggplot2
+
+**ggplot2* is a versatile and powerful R package used for creating data visualizations with enhanced aesthetics.
+
+**a. Installing and Loading ggplot2**
+
+```
+# install the complete tidyverse packages
+install.packages("tidyverse")
+
+# Alternatively, install just ggplot2:
+install.packages("ggplot2")
+
+# loading the ggplot2 library
+library(ggplot2)
+
+```
+**Excercise 1***
+
+Create a scatter plot  mpg vs horsepower (mpg ~ hp) from ***mtcars*** data and differentiate the points by cylinders
+
+<details>
+  <summary>Excercise 1 Answer</summary>
+  
+```
+# Convert cyl to a factor : ensuring to consider this a categorical values
+mtcars$cyl <- as.factor(mtcars$cyl)
+
+# Create a color vector
+
+colors <- c("red", "blue", "green")
+
+# Plot mpg against hp with colors based on cyl
+
+plot(mpg ~ hp, data = mtcars, col = colors[mtcars$cyl], cex = 1.2)
+
+# Add legend
+
+legend("topright", legend = levels(mtcars$cyl), col = colors, pch = 1)
+
+```
+![R base plot ](images/Rplot_mtcars1.png){width :50%}
+
+</details>
+
+---
+
+**b .Creating a Simple Scatter Plot**
+
+The above graph can be achived in ggplot2 using the below command
+
+```
+
+ggplot(mtcars, aes(x=hp, y=mpg, color=cyl)) +geom_point(size=3)
+
+```
+
+![R ggplot2 scatter ](images/Rplot_mtcars2.png){width :50%}
+
+**ggplot2 components**
+
+In total there are 7 Components associated with a ggplot2 of which need input for 3 components from user.
+
+![R ggplot2 components ](images/overview_graphic-1.png){width :50%}
+[source :tidyverse.org](https://ggplot2.tidyverse.org/articles/ggplot2.html#mapping)
+
+the three components 
+
+- data
+- mapping
+- and a layer
+
+**`+`** is used to add layers,scales and facets to the plot
+
+In the above example; ggplot2 command can be classified into 3 Components
+
+**1. data** : data frame eg mtcars
+
+**2. mapping**  : aes(x=hp, y=mpg) 
+
+**3. layer** : geom_point() adds points to the plot, creating a scatter plot.Sets the size of the points to 3. You can adjust this value to make the points larger or smaller. 
+
+
+
+---
+
+**c Customizing the Plot**
+
+
+***Adding Titles and Labels***
+
+function labs() adds labels to the existing plot. You can set the title, x-axis label, and y-axis label. 
+
+```
+ggplot(mtcars, aes(x=hp, y=mpg, color=cyl))+
+  geom_point(size=3)+
+  labs(
+    title = "Scatter Plot of Engine Displacement vs. Highway MPG",
+    x = "Engine Displacement (L)",
+    y = "Highway MPG"
+  )
+
+```
+
+![R ggplot2 titles and lables ](images/Rplot_mtcar3.png){width :50%}
+
+
+***Adding additional layers***
+
+Smoothed conditional means using function **geom_smooth()** 
+
+```
+ggplot(mtcars, aes(x=hp, y=mpg, color=cyl))+
+  geom_point(size=3)+
+  labs(
+    title = "Scatter Plot of Engine Displacement vs. Highway MPG",
+    x = "Engine Displacement (L)",
+    y = "Highway MPG"
+  )+  geom_smooth(method = "lm") 
+
+
+```
+
+![R ggplot2 titles and lables ](images/Rplot_smooth.png){width :50%}
+
+for more arguments and otions related to the function
+
+```
+?geom_smooth
+  
+```
+
+***Faceting***
+
+Faceting allows you to split your data into multiple plots based on a factor variable.
+
+For example if we need to add transmition (manual/automatic) and create a separate images for each
+
+```
+ggplot(mtcars, aes(x=hp, y=mpg, color=cyl))+
+  geom_point(size=3)+  facet_wrap(~  am ) +
+  labs(
+    title = "Scatter Plot of Engine Displacement vs. Highway MPG",
+    x = "Engine Displacement (L)",
+    y = "Highway MPG"
+  )+geom_smooth(method = "lm")
+
+```
+
+![R ggplot2 titles and lables ](images/Rplot_facet_wrap.png){width :50%}
+
+
+facet_wrap(~ am):
+
+- the tilde (~) operator is used to specify the formula that defines the faceting
+- Splits the data into multiple panels based on the am (transmission) variable.
+- am is a factor variable indicating the type of transmission (0 = automatic, 1 = manual).
+- This means the plot will be divided into two separate scatter plots: one for automatic and one for manual transmission.
+
+
+**Excercise 2**
+
+Change the labels 0 to "Automatic" & 1 to "Manual" .
+
+
+<details>
+  <summary>Excercise 2 Answer</summary>
+  
+```
+# Creating a New Factor Variable with Labels:
+
+mtcars$transmission <- factor(mtcars$am, labels = c("Automatic", "Manual"))
+
+# Create the plot with the new transmission labels instead of the column am in facet_wrap()
+
+ggplot(mtcars, aes(x = hp, y = mpg, color = cyl)) +
+  geom_point(size = 3) +  
+  facet_wrap(~ transmission) +
+  labs(
+    title = "Scatter Plot of Engine Displacement vs. Highway MPG",
+    x = "Engine Displacement (L)",
+    y = "Highway MPG"
+  ) + 
+  geom_smooth(method = "lm")
+  
+
+```
+![R Excercise plot ](images/Rplot_Excercise2.png){width :50%}
+
+
+***Its sometimes easy and simple to do manupulations in the datasets to make changes in the plot rather than going for advanced options in the graph***
+
+</details>
+
+***facet_grid***
+
+To add another subset of plots based on second variable
+
+In the example below , facet_grid(vs ~ transmission) creates a grid of panels where each row represents a level of the vs variable and each column represents a level of the transmission variable. This results in a total of four panels in the grid: two for each level of vs (V1 and V2) and two for each level of transmission (Automatic and Manual), forming a 2x2 grid.
+
+```
+ggplot(mtcars, aes(x = hp, y = mpg, color = cyl)) +
+  geom_point(size = 3) +  
+  facet_grid(vs ~ transmission) +
+  labs(
+    title = "Scatter Plot of Engine Displacement vs. Highway MPG",
+    x = "Engine Displacement (L)",
+    y = "Highway MPG"
+  ) + 
+  geom_smooth(method = "lm")
+
+
+
+
+```
+![R facet_grid plot ](images/Rplot_facet_grid.png){width :50%}
+
+***Themes***
+
+The theme function controls for the look and feel of the plot by customizing the location of legend, colour of the background, gridlines etc. 
+
+ggplot has some built in themes that can be called in using the theme names. Few of them are as follows
+
+![R ggplot plot ](images/Some_Themes.png){width :50%}
+
+Customizes the appearance of the plot.
+
+```
+ggplot(mtcars, aes(x = hp, y = mpg, color = cyl)) +
+  geom_point(size = 3) +  
+  facet_grid(vs ~ transmission) +
+  labs(
+    title = "Scatter Plot of Engine Displacement vs. Highway MPG",
+    x = "Engine Displacement (L)",
+    y = "Highway MPG"
+  ) + 
+  geom_smooth(method = "lm") + theme(axis.text = element_text(colour = "blue"),legend.position = "top",strip.background = element_rect(colour = "orange", fill = "white"))
+
+
+```
+
+![R ggplot plot ](images/Rplot_Custom.png){width :50%}
+
+
+- axis.text = element_text(colour = "blue"): Sets the color of axis text to blue.
+- legend.position = "top": Positions the legend at the top of the plot.
+- strip.background = element_rect(colour = "orange", fill = "white"): Sets the background color of facet strips to white with an orange border.
+
+for more otions in Customization
+
+```
+
+?theme
+
+```
+
+
+---
+
+
+
