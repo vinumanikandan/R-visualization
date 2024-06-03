@@ -422,6 +422,13 @@ heatmap(df, scale = "none")
 ```
 ![R ggplot plot ](images/Rplot_heatmap.png){width :50%}
 
+**Complex Heatmap***
+
+Complex heatmaps are efficient to visualize associations between different sources of data sets and reveal potential patterns. [More info](https://jokergoo.github.io/ComplexHeatmap-reference/book/introduction.html)
+
+
+
+
 
 ---
 
