@@ -275,6 +275,153 @@ for more otions in Customization
 
 ```
 
+## Boxplot
+
+geom_boxplot()
+
+```
+
+ggplot(mtcars, aes(x = cyl, y = mpg,color = cyl)) +
+  geom_boxplot() +
+  labs(
+    title = "Box Plot of Miles per Gallon by Number of Cylinders",
+    x = "Number of Cylinders",
+    y = "Miles per Gallon"
+  )
+
+```
+
+![R ggplot plot ](images/Rplot_Boxplot.png){width :50%}
+
+**custome boxplot**
+
+```
+
+ggplot(mtcars, aes(x = cyl, y = mpg,color = cyl)) +
+  geom_boxplot(
+    
+    # custom boxes
+    color="blue",
+    fill="blue",
+    alpha=0.2,
+    
+    # Notch?
+    notch=TRUE,
+    notchwidth = 0.8,
+    
+    # custom outliers
+    outlier.colour="red",
+    outlier.fill="red",
+    outlier.size=3
+    
+  ) +
+  labs(
+    title = "Box Plot of Miles per Gallon by Number of Cylinders",
+    x = "Number of Cylinders",
+    y = "Miles per Gallon"
+  )+ geom_jitter(color="black", size=0.4, alpha=0.9) 
+
+```
+
+![R ggplot plot ](images/Rplot_geom_boxplot.png){width :50%}
+
+**grouped boxplot**
+
+```
+ggplot(mtcars, aes(x = cyl, y = mpg, fill = transmission)) +
+  geom_boxplot() +
+  labs(
+    title = "Box Plot of Miles per Gallon by Number of Cylinders and Transmission Type",
+    x = "Number of Cylinders",
+    y = "Miles per Gallon",
+    fill = "Transmission"
+  )
+```
+
+![R ggplot plot ](images/Rplot_groupedboxplot.png){width :50%}
+
+## Create a Violin plot
+
+geom_violin()
+
+```
+
+ggplot(mtcars, aes(x = cyl, y = mpg,color = cyl)) +
+  geom_violin() +
+  labs(
+    title = "Box Plot of Miles per Gallon by Number of Cylinders",
+    x = "Number of Cylinders",
+    y = "Miles per Gallon"
+  )
+
+```
+
+
+![R ggplot plot ](images/Rplot_violin.png){width :50%}
+
+
+
+## Density plot
+
+geom_density()
+
+```
+ggplot(mtcars, aes(x = mpg,group=transmission, fill=transmission)) +
+  geom_density() +
+  labs(
+    title = "Density Plot of Miles per Gallon",
+    x = "Miles per Gallon",
+    y = "Density"
+  )
+```
+
+
+![R ggplot plot ](images/Rplot_DensityPlot.png){width :50%}
+
+
+**ggextra**
+
+Create a ggplot2 scatterplot with marginal density plots (default) or histograms, or add the marginal plots to an existing scatterplot.
+
+ 
+
+```
+install.packages("ggExtra")
+library(ggExtra)
+
+# Load necessary packages
+library(ggplot2)
+library(ggExtra)
+
+# Convert 'cyl' to a factor
+mtcars$cyl <- as.factor(mtcars$cyl)
+
+# Create the scatter plot with color grouping by 'cyl'
+p <- ggplot(mtcars, aes(x = hp, y = mpg, color = cyl)) +
+  geom_point(size = 3) +
+  labs(
+    title = "Scatter Plot of Horsepower vs. Miles per Gallon",
+    x = "Horsepower",
+    y = "Miles per Gallon",
+    color = "Cylinders"
+  ) 
+
+# Add marginal density plots
+ggMarginal(p, type = "density", groupFill = TRUE)
+```
+![R ggplot plot ](images/Rplot_ggMarginal.png){width :50%}
+
+**Heatmap**
+
+```
+
+## Reload the mtcars and scale the values
+df <- scale(mtcars)
+heatmap(df, scale = "none")
+
+```
+![R ggplot plot ](images/Rplot_heatmap.png){width :50%}
+
 
 ---
 
