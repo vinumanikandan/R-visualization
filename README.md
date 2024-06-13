@@ -411,6 +411,43 @@ ggMarginal(p, type = "density", groupFill = TRUE)
 ```
 ![R ggplot plot ](images/Rplot_ggMarginal.png){width :50%}
 
+**BarPlot**
+
+```
+bar <- ggplot(data = diamonds) + 
+  geom_bar(
+    mapping = aes(x = cut, fill = cut), 
+    show.legend = FALSE,
+    width = 1
+  ) + 
+  theme(aspect.ratio = 1) +
+  labs(x = NULL, y = NULL)
+
+bar
+
+```
+
+![R ggplot plot ](images/BarPlot.png){width :50%}
+
+fliping the plot
+
+```
+bar + coord_flip()
+
+```
+![R ggplot plot ](images/BarPlot_flip.png){width :50%}
+
+stacked bar chart in polar style
+
+```
+
+bar + coord_polar()
+
+```
+
+![R ggplot plot ](images/BarPlot_polar.png){width :50%}
+
+
 **Heatmap**
 
 ```
@@ -420,7 +457,10 @@ df <- scale(mtcars)
 heatmap(df, scale = "none")
 
 ```
+
 ![R ggplot plot ](images/Rplot_heatmap.png){width :50%}
+
+
 
 **Complex Heatmap***
 
