@@ -155,9 +155,11 @@ Produce box-and-whisker plot(s) of the given (grouped) values.
 
 ```
      
-boxplot(airquality$Ozone,ylab='airquality Ozone', col='white')    
+boxplot(airquality$Ozone~airquality$Month,ylab='airquality Ozone', col='white')
+ 
 ```
 
+![plot hist screenshot](images/Rplot_box2.png){ width=50% }
 
 
 # [Tidyverse](https://www.tidyverse.org)
