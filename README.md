@@ -2,13 +2,6 @@
 How to create publication quality plots using different R libraries
 
 
-
-
-## Different libraries
-
-Base R can create different simple plots like scatter ,histograms,boxplots,barplots etc with limited asethetics. To enhance the athestics, elegances and to create complex plots/graphs with reproducibility we can need to use specialised libraries. There are many specialised libraries in the public domain that can be used. In this module we will look into **gggplot2** and **patchwork**.
-
-
 # R graphics using R base
 
 
@@ -160,6 +153,11 @@ boxplot(airquality$Ozone~airquality$Month,ylab='airquality Ozone', col='white')
 ```
 
 ![plot hist screenshot](images/Rplot_box2.png){ width=50% }
+
+
+## Different libraries
+
+Base R can create different simple plots like scatter ,histograms,boxplots,barplots etc with limited asethetics. To enhance the athestics, elegances and to create complex plots/graphs with reproducibility we can need to use specialised libraries. There are many specialised libraries in the public domain that can be used. In this module we will look into **gggplot2** and **patchwork**.
 
 
 # [Tidyverse](https://www.tidyverse.org)
