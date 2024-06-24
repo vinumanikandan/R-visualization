@@ -1,9 +1,163 @@
 # R-visualization
 How to create publication quality plots using different R libraries
 
+
+
+
 ## Different libraries
 
 Base R can create different simple plots like scatter ,histograms,boxplots,barplots etc with limited asethetics. To enhance the athestics, elegances and to create complex plots/graphs with reproducibility we can need to use specialised libraries. There are many specialised libraries in the public domain that can be used. In this module we will look into **gggplot2** and **patchwork**.
+
+
+# R graphics using R base
+
+
+
+**Scatter plot**
+
+Scatter plot is created using function plot(). plot function needs 2 parameters X-axis and Y-axis
+
+```
+x <- 1:100
+y <- log(x) + (x/100)^5
+plot(x,y)
+```
+![First plot Screenshot](images/first_plot.png){ width=50% }
+
+
+Customization of the plots
+- points() to add points to an existing plot
+- lines() to add a line to an existing plot
+- col indicating the colour
+- lwd indicating the line width
+- lty indicating the line type
+- pch indicating the plotting character (symbol)
+```
+lines(x,y+1)
+points(x,y-1, type="b")
+```
+![plot Types screenshot](images/Rplot2.png){ width=50% }
+
+
+![plot Types screenshot](images/PlotTypes.png ){ width=50% }
+
+![plot Types screenshot](images/LineTypes.png){ width=50% }
+
+
+### Adding color 
+
+By default user can acess 100+ colurs by using function ***colours()***. More [info](www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf)
+
+```
+x <- seq(0, 100, length.out=10)
+y <- log(x) + (x/100)^5
+plot(x,y, type="l", col="red",
+ylim=c(1,7),
+xlab="The variable x",
+main ="x vs. y" )
+lines(x, y+1, lwd=3,
+lty="dashed", col="blue")
+points(x, y-1, type="b", pch=15)
+
+```
+
+![plot by colour screenshot](images/Rplot_color.png){ width=50% }
+
+**Adding legends**
+
+```
+x <- seq(0, 100, length.out=10)
+y <- log(x) + (x/100)^5
+plot(x,y, type="l", col="red",
+     ylim=c(1,7),
+     xlab="The variable x",
+     main ="x vs. y" )
+lines(x, y+1, lwd=3,
+      lty="dashed", col="blue")
+points(x, y-1, type="b", pch=15)
+
+
+legend(x="bottomright",
+       legend=c("red line",
+                "blue line", "black line"),
+       lty=c(1,2,1),
+       pch=c(NA,NA,19),
+       col=c("red", "blue", "black"),
+       bg="gray90")
+````
+
+
+
+**abline**
+
+To add multiple lines (vertically, horizontally or sloped) to an existing plot to show cutoffs,boundaries and also ti show fitting line to the data.
+
+1. Adding horzontal line
+
+```
+data(airquality)
+plot(airquality$Wind, airquality$Ozone, pch=20, xlab= "Wind (mph)", ylab="Ozone (ppb)")
+abline(h=60, col="red", lty="dashed")
+
+```
+
+![plot abline h screenshot](images/Rplot_abline_h.png){ width=50% }
+
+2 . Adding vertical line 
+
+```
+
+abline(v = seq(0, 25, 5), col = "blue", lty = 4)
+
+```
+
+![plot abline h screenshot](images/Rplot_abline_v.png){ width=50% }
+
+seq function allow here to  generates a sequence of numbers from 0 to 25 in steps of 5.
+
+
+3 . Adding Trend line 
+
+```
+
+abline(lm(airquality$Ozone ~ airquality$Wind), col=8, lwd=2)
+
+```
+
+![plot abline h screenshot](images/Rplot_lm.png){ width=50% }
+
+
+**Histogram**
+
+To create histogram R base uses function hist(). The generic function hist computes a histogram of the given data values. If plot = TRUE, the resulting object of class "histogram" is plotted by plot.histogram, before it is returned.
+
+```
+hist(airquality$Wind)
+
+```
+
+![plot hist screenshot](images/Rplot_hist.png){ width=50% }
+
+Customization of the histogram
+
+```
+hist(airquality$Wind, freq=FALSE, main="Hist", col="grey") 
+lines(density(airquality$Wind), Col="blue", lwd=2)
+```
+
+![plot hist screenshot](images/Rplot_hist_Custom.png){ width=50% }
+
+
+**Boxplot**
+
+Produce box-and-whisker plot(s) of the given (grouped) values.
+
+
+```
+     
+boxplot(airquality$Ozone,ylab='airquality Ozone', col='white')    
+```
+
 
 
 # [Tidyverse](https://www.tidyverse.org)
