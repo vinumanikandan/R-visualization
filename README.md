@@ -23,7 +23,7 @@ y <- log(x) + (x/100)^5
 plot(x,y)
 ```
 
-![First plot Screenshot]([https://github.com/vinumanikandan/R-Basics/blob/main/images/first_plot.png){ width=50% }
+![First plot Screenshot]([images/first_plot.png){ width=50% }
 
 
 Customization of the plots
