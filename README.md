@@ -160,8 +160,8 @@ boxplot(airquality$Ozone~airquality$Month,ylab='airquality Ozone', col='white')
 Base R can create different simple plots like scatter ,histograms,boxplots,barplots etc with limited asethetics. To enhance the athestics, elegances and to create complex plots/graphs with reproducibility we can need to use specialised libraries. There are many specialised libraries in the public domain that can be used. In this module we will look into **gggplot2** and **patchwork**.
 
 
-# [Tidyverse](https://www.tidyverse.org)
-Tidyverse is an ecosytem of R packages designed the usability of data which includes data wrangling,data manuplation,data managment and data plotting. Tidyverse achieves this by creating independent packages in its universe 
+# Tidyverse
+[Tidyverse](https://www.tidyverse.org) is an ecosytem of R packages designed the usability of data which includes data wrangling,data manuplation,data managment and data plotting. Tidyverse achieves this by creating independent packages in its universe 
 
 **1. ggplot2 :** ggplot2 (grammer of graphics) is a R package for data visulization
 
@@ -614,6 +614,26 @@ heatmap(df, scale = "none")
 
 ![R ggplot plot ](images/Rplot_heatmap.png){width :50%}
 
+
+**pheatmap (Pretty heatmap)**
+
+The pheatmap package in R is a powerful tool for creating complex heatmaps with ease. Apart from the basic heatmap functionalities, pheatmap provides more flexible and aesthetically visualization by providing option to perfrom Hierarchical Clustering both 2 ways (clustering on both rows and columns) and 1 way Clusturing (clustering on either rows and columns)
+
+```
+install.packages("pheatmap")
+library("pheatmap")
+
+pheatmap(df)
+```
+
+![R ggplot plot ](images/Rplot_pheatmap.png){width :50%}
+
+By default its 2 ways clusturing of and can be controlled with ease by
+
+```
+pheatmap(df,cluster_rows=TRUE, show_rownames=TRUE, cluster_cols=FALSE)
+```
+![R ggplot plot ](images/Rplot_pheatmap2.png){width :50%}
 
 
 **Complex Heatmap***
