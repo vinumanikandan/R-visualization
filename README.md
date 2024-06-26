@@ -1,10 +1,58 @@
 # R-visualization
-How to create publication quality plots using different R libraries
+How to create publication quality plots using different R libraries.
 
 
-# R graphics using R base
+## Prerequisites
+
+Participants should have:
+- Basic knowledge of R syntax
+- Familiarity with data frames and vectors
+- Installed R and RStudio
+
+If you are new to R and encounter any difficulties, please refer to the [Basic R Guide](https://github.com/vinumanikandan/R-visualization/blob/main/README.md) for a comprehensive introduction and helpful resources.
 
 
+## R-visualization Workshop Agenda
+ 
+ 1. **Introduction**
+ 2. **Plotting with R Base**
+      1. **Scatter Plot**
+           - Creating scatter plots using `plot()`
+            - Customizing plots: `points()`, `lines()`, `col`, `lwd`, `lty`, `pch`
+            - Adding color and legends
+            - Adding lines with `abline()`
+       2. **Histogram**
+            - Creating histograms with `hist()`
+            - Customizing histograms
+
+       3. **Boxplot**
+            - Creating boxplots with `boxplot()`
+
+
+3. **Tidyverse Overview**
+     - Introduction to the Tidyverse ecosystem
+
+4. **ggplot2**
+     - Installation and loading of the `ggplot2` package
+     - Creating a Simple Scatter Plot
+     - Customizing the Plot
+          - Adding titles and labels with `labs()`
+          - Adding additional layers with `geom_smooth()`
+          - Faceting with `facet_wrap()` and `facet_grid()`
+          - Customizing themes
+
+     - Creating and customizing boxplots
+     - Creating violin plots
+     - Creating density plots 
+     - Creating and customizing bar plots
+     - Creating heatmaps
+
+
+
+# Introduction
+Base R can create different simple plots like scatter ,histograms,boxplots,barplots etc with limited asethetics. To enhance the athestics, elegances and to create complex plots/graphs with reproducibility we can need to use specialised libraries. There are many specialised libraries in the public domain that can be used. In this module we will look into **gggplot2** and **patchwork**.
+
+# Plotting by R base
 
 **Scatter plot**
 
@@ -25,6 +73,16 @@ Customization of the plots
 - lwd indicating the line width
 - lty indicating the line type
 - pch indicating the plotting character (symbol)
+- types
+**differet types**
+ - `p` for points
+ - `l` for lines 
+ - `b` for both points and lines 
+ - `c` for empty points joined by lines
+ - `o` for overplotted points and lines
+ - `s` & `S` for stair steps 
+ - `h` for histogram-like vertical lines. 
+ - `n` does not produce any points or lines.
 ```
 lines(x,y+1)
 points(x,y-1, type="b")
@@ -35,6 +93,7 @@ points(x,y-1, type="b")
 ![plot Types screenshot](images/PlotTypes.png ){ width=50% }
 
 ![plot Types screenshot](images/LineTypes.png){ width=50% }
+
 
 
 ### Adding color 
@@ -155,9 +214,39 @@ boxplot(airquality$Ozone~airquality$Month,ylab='airquality Ozone', col='white')
 ![plot hist screenshot](images/Rplot_box2.png){ width=50% }
 
 
-## Different libraries
+**Excercise 1***
 
-Base R can create different simple plots like scatter ,histograms,boxplots,barplots etc with limited asethetics. To enhance the athestics, elegances and to create complex plots/graphs with reproducibility we can need to use specialised libraries. There are many specialised libraries in the public domain that can be used. In this module we will look into **gggplot2** and **patchwork**.
+Create a scatter plot  mpg vs horsepower (mpg ~ hp) from ***mtcars*** data and differentiate the points by cylinders
+
+<details>
+  <summary>Excercise 1 Answer</summary>
+  
+```
+# Convert cyl to a factor : ensuring to consider this a categorical values
+mtcars$cyl <- as.factor(mtcars$cyl)
+
+# Create a color vector
+
+colors <- c("red", "blue", "green")
+
+# Plot mpg against hp with colors based on cyl
+
+plot(mpg ~ hp, data = mtcars, col = colors[mtcars$cyl], cex = 1.2)
+
+# Add legend
+
+legend("topright", legend = levels(mtcars$cyl), col = colors, pch = 1)
+
+```
+![R base plot ](images/Rplot_mtcars1.png){width :50%}
+
+</details>
+
+---
+
+
+
+
 
 
 # Tidyverse
@@ -190,35 +279,6 @@ install.packages("ggplot2")
 library(ggplot2)
 
 ```
-**Excercise 1***
-
-Create a scatter plot  mpg vs horsepower (mpg ~ hp) from ***mtcars*** data and differentiate the points by cylinders
-
-<details>
-  <summary>Excercise 1 Answer</summary>
-  
-```
-# Convert cyl to a factor : ensuring to consider this a categorical values
-mtcars$cyl <- as.factor(mtcars$cyl)
-
-# Create a color vector
-
-colors <- c("red", "blue", "green")
-
-# Plot mpg against hp with colors based on cyl
-
-plot(mpg ~ hp, data = mtcars, col = colors[mtcars$cyl], cex = 1.2)
-
-# Add legend
-
-legend("topright", legend = levels(mtcars$cyl), col = colors, pch = 1)
-
-```
-![R base plot ](images/Rplot_mtcars1.png){width :50%}
-
-</details>
-
----
 
 **b .Creating a Simple Scatter Plot**
 
