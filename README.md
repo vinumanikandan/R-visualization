@@ -46,8 +46,12 @@ If you are new to R and encounter any difficulties, please refer to the [Basic R
      - Creating density plots 
      - Creating and customizing bar plots
      - Creating heatmaps
+     - PCA
 
 
+5. **Conclusion**
+   - Resources for further learning (books, online tutorials, etc.)
+   - Q&A and Feedback
 
 # Introduction
 Base R can create different simple plots like scatter ,histograms,boxplots,barplots etc with limited asethetics. To enhance the athestics, elegances and to create complex plots/graphs with reproducibility we can need to use specialised libraries. There are many specialised libraries in the public domain that can be used. In this module we will look into **gggplot2** and **patchwork**.
@@ -700,10 +704,48 @@ pheatmap(df,cluster_rows=TRUE, show_rownames=TRUE, cluster_cols=FALSE)
 
 Complex heatmaps are efficient to visualize associations between different sources of data sets and reveal potential patterns. [More info](https://jokergoo.github.io/ComplexHeatmap-reference/book/introduction.html)
 
+**PCA***
+
+Principal Component Analysis (PCA) is a method for reducing the dimensionality of a dataset while preserving as much variance as possible. This technique is helpful for visualizing high-dimensional data, identifying patterns, and simplifying data for further analysis. 
+
+`prcomp` is a function in R used for performing Principal Component Analysis (PCA).
+
+```
+# Perform PCA
+pca_result <- prcomp(mtcars, scale. = TRUE)
+pca_result
+```
+
+**Plotting PCA**
+
+```
+# Create a data frame with PCA results
+pca_data <- as.data.frame(pca_result$x)
+pca_data$car <- rownames(mtcars)
+
+# Plot using ggplot2
+ggplot(pca_data, aes(x = PC1, y = PC2, label = car)) +
+  geom_point(color = "blue") +
+  geom_text(vjust = -0.5) +
+  labs(title = "PCA of mtcars Dataset",
+       x = "Principal Component 1",
+       y = "Principal Component 2") +
+  theme_minimal()
+
+```
+
+![R ggplot PCA plot ](images/Rplot_PCA.png){width :50%}
 
 
-
-
+5. **Conclusion**
+   - Resources for further learning (books, online tutorials, etc.)
+      - [tidyverse](https://www.tidyverse.org/packages/)
+      - [ggplot2](https://ggplot2.tidyverse.org)
+      - [R Graph Gallery](https://r-graph-gallery.com)
+      - [Data science box](https://datasciencebox.org)
+        
+   - Q&A and Feedback
+     
 ---
 
 
