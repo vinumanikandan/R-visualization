@@ -736,6 +736,42 @@ ggplot(pca_data, aes(x = PC1, y = PC2, label = car)) +
 
 ![R ggplot PCA plot ](images/Rplot_PCA.png){width :50%}
 
+In Bioinformatics we use `DESeq2` R package for analyzing raw count-based RNA-Seq data, providing methods for normalization, differential expression analysis, and data visualization.
+
+```
+dds <- DESeqDataSet(airway, design = ~ cell + dex)
+vsd <- vst(dds, blind = TRUE)
+```
+vsd (variance-stabilizing transformation) is an object that contains transformed RNA-Seq count data, allowing for better visualization and comparison by stabilizing the variance across the range of mean values.
+
+**points colored by the cell**
+
+```
+plotPCA(vsd,  intgroup=c("cell"))
+```
+![R ggplot PCA plot ](images/Rplot_PCA_Gex1.png){width :50%}
+
+**points colored by the dex**
+
+```
+plotPCA(vsd,  intgroup=c("dex"))
+```
+![R ggplot PCA plot ](images/Rplot_PCA_Gex2.png){width :50%}
+
+This code performs PCA on RNA-Seq count data, extracts the variance explained by the first two principal components, and visualizes the results using ggplot2, with points colored by the "cell" factor and shaped by the "dex" factor. The axes are labeled with the percentage of variance explained, and the aspect ratio of the plot is fixed for accurate representation.
+
+```
+pcaData <- plotPCA(vsd, intgroup=c("cell", "dex"), returnData=TRUE)
+percentVar <- round(100 * attr(pcaData, "percentVar"))
+ggplot(pcaData, aes(PC1, PC2, color=cell, shape=dex)) +
+  geom_point(size=3) +
+  xlab(paste0("PC1: ",percentVar[1],"% variance")) +
+  ylab(paste0("PC2: ",percentVar[2],"% variance")) + 
+  coord_fixed()
+dev.off()
+```
+![R ggplot PCA plot ](images/Rplot_PCA_Gex3.png){width :50%}
+
 
 5. **Conclusion**
    - Resources for further learning (books, online tutorials, etc.)
