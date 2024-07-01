@@ -512,9 +512,17 @@ Customizing the theme() function in ggplot2 to change the font family to "Arial"
         
         )
 ```
-Above :
+
+![R ggplot plot ](images/Rplot_ggplot_Custom_Font.png)
+
  - text = element_text(family = "Arial", size = 14) sets the default text properties for the plot.
+
+
  - axis.title, axis.text, plot.title, legend.title, and legend.text are specifically customized to use the "Arial" font family and respective sizes.
+
+
+ - angle: specifies the angle of the text. To adjust only x axis use `axis.text.x = element_text(colour = "blue",angle=30)`
+   
 
 You can adjust the family and size arguments to match your desired font and size
 
