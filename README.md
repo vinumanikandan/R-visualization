@@ -103,7 +103,7 @@ points(x,y-1, type="b")
 
 ### Adding color 
 
-By default user can acess 100+ colurs by using function ***colours()***. More [info](www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf)
+By default user can acess 100+ colurs by using function ***colours()***. More [info](https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf)
 
 ```
 x <- seq(0, 100, length.out=10)
