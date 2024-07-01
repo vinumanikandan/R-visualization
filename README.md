@@ -48,8 +48,9 @@ If you are new to R and encounter any difficulties, please refer to the [Basic R
      - Creating heatmaps
      - PCA
 
-
-5. **Conclusion**
+5. **Saving Plots**
+   
+7. **Conclusion**
    - Resources for further learning (books, online tutorials, etc.)
    - Q&A and Feedback
 
@@ -772,8 +773,42 @@ dev.off()
 ```
 ![R ggplot PCA plot ](images/Rplot_PCA_Gex3.png){width :50%}
 
+5. **Saving plots**
+   
+All the graphs (bar plot, pie chart, histogram, etc.) we plot in R programming are displayed on the Plot windows in R studio by default.
+We can save these plots direactly as a file with the help of built-in functions such as
 
-5. **Conclusion**
+    - ggsave
+    - png
+    - pdf
+    - tiff
+
+  **ggsave**
+   ```
+    p<- ggplot(pcaData, aes(PC1, PC2, color=cell, shape=dex)) +
+  geom_point(size=3) +
+  xlab(paste0("PC1: ",percentVar[1],"% variance")) +
+  ylab(paste0("PC2: ",percentVar[2],"% variance")) + 
+  coord_fixed()
+     ggsave("PCA_plot.png", plot = p, width = 6, height = 4, units = "in")
+   ```
+
+  **png**
+```
+png(file="PCA_plot2.png", width=600, height=350, res=300, units="px")
+ p
+dev.off()
+```
+Please note that we need to call the function dev.off() after the plotting, to stop writing to the files & save the file and return control to the user.
+
+**tiff**
+```
+tiff(file="PCA_plot.tiff", width=16, height=14, units="in", res=300)
+ p
+ dev.off()
+```
+
+6. **Conclusion**
    - Resources for further learning (books, online tutorials, etc.)
       - [tidyverse](https://www.tidyverse.org/packages/)
       - [ggplot2](https://ggplot2.tidyverse.org)
