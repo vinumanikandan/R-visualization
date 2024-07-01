@@ -486,13 +486,39 @@ ggplot(mtcars, aes(x = hp, y = mpg, color = cyl)) +
 - legend.position = "top": Positions the legend at the top of the plot.
 - strip.background = element_rect(colour = "orange", fill = "white"): Sets the background color of facet strips to white with an orange border.
 
-for more otions in Customization
+**Customization by font**
+
+Customizing the theme() function in ggplot2 to change the font family to "Arial" and the font size for the various text elements in the plot
 
 ```
-
-?theme
-
+   
+  ggplot(mtcars, aes(x = hp, y = mpg, color = cyl)) +
+  geom_point(size = 3) +  
+  facet_grid(vs ~ transmission) +
+  labs(
+    title = "Scatter Plot of Engine Displacement vs. Highway MPG",
+    x = "Engine Displacement (L)",
+    y = "Highway MPG"
+  ) + 
+  geom_smooth(method = "lm") + 
+  theme(
+        legend.position = "top",
+        text = element_text(family = "Arial", size = 14),
+        strip.background = element_rect(colour = "orange", fill = "white"),
+        axis.title = element_text(family = "Arial", size = 16),
+        plot.title = element_text(family = "Arial", size = 16, face = "bold"),
+        axis.text = element_text(colour = "blue",angle=30)
+        
+        
+        )
 ```
+Above :
+ - text = element_text(family = "Arial", size = 14) sets the default text properties for the plot.
+ - axis.title, axis.text, plot.title, legend.title, and legend.text are specifically customized to use the "Arial" font family and respective sizes.
+
+You can adjust the family and size arguments to match your desired font and size
+
+for more options in Customization try `?theme` or `help(theme)` or [More info](https://ggplot2.tidyverse.org/reference/element.html)
 
 ## Boxplot
 
