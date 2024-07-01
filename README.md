@@ -9,7 +9,7 @@ Participants should have:
 - Familiarity with data frames and vectors
 - Installed R and RStudio
 
-If you are new to R and encounter any difficulties, please refer to the [Basic R Guide](https://github.com/vinumanikandan/R-visualization/blob/main/README.md) for a comprehensive introduction and helpful resources.
+If you are new to R and encounter any difficulties, please refer to the [Basic R Guide](https://github.com/vinumanikandan/R-Basics) for a comprehensive introduction and helpful resources.
 
 
 ## R-visualization Workshop Agenda
