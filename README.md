@@ -491,26 +491,25 @@ ggplot(mtcars, aes(x = hp, y = mpg, color = cyl)) +
 Customizing the theme() function in ggplot2 to change the font family to "Arial" and the font size for the various text elements in the plot
 
 ```
-   
-  ggplot(mtcars, aes(x = hp, y = mpg, color = cyl)) +
-  geom_point(size = 3) +  
-  facet_grid(vs ~ transmission) +
-  labs(
+ggplot(mtcars, aes(x = hp, y = mpg, color = cyl), na.rm = TRUE) + ## data
+geom_point(size = 3) +  #scatter plot
+facet_grid(vs ~ transmission) + # grid function
+labs(
     title = "Scatter Plot of Engine Displacement vs. Highway MPG",
     x = "Engine Displacement (L)",
     y = "Highway MPG"
-  ) + 
-  geom_smooth(method = "lm") + 
+  ) +  # lable
+geom_smooth(method = "lm") +  #Fitline
   theme(
-        legend.position = "top",
-        text = element_text(family = "Arial", size = 14),
-        strip.background = element_rect(colour = "orange", fill = "white"),
-        axis.title = element_text(family = "Arial", size = 16),
-        plot.title = element_text(family = "Arial", size = 16, face = "bold"),
-        axis.text = element_text(colour = "blue",angle=30)
-        
-        
-        )
+        legend.position = "top", #poistion of the legend 
+        text = element_text(family = "Arial", size = 14), #defualt font and size of all the texts in the plot
+        strip.background = element_rect(colour = "orange", fill = "white"), # Cutomization of the title box 
+        axis.title = element_text(family = "Arial", size = 16), # setting different fonts as default for all the axis
+        plot.title = element_text(family = "Arial", size = 16, face = "bold", hjust=0.5), # setting fonts for tittle
+        axis.text.x  = element_text(colour = "blue",angle=30), # setting x-axis customization
+        axis.text.y  = element_text(colour = "orange") #setting y-axis customization
+        ) #Customization of plot
+  
 ```
 
 ![R ggplot plot ](images/Rplot_ggplot_Custom_Font.png)
