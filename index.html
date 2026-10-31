@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>R Visualization · Interactive training · Vinu Manikandan</title>
+  <meta name="description" content="Create publication-quality plots in R with base graphics and ggplot2 — run every example in your browser.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230f766e'/><text x='50%25' y='56%25' font-size='30' font-family='monospace' font-weight='700' fill='white' text-anchor='middle' dominant-baseline='middle'>VM</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <link rel="stylesheet" href="course/course.css">
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <button class="icon-btn toc-btn" id="tocBtn" aria-label="Show contents">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h10M4 18h16"/></svg>
+      </button>
+      <a class="back" href="../" title="Back to Vinu Manikandan's home page">
+        <span class="back__mark">VM</span>
+        <span class="back__text">Training <small>· Vinu Manikandan</small></span>
+      </a>
+      <div class="topbar__right">
+        <span class="r-status" id="rStatus" data-state="idle"><i></i><span></span></span>
+        <label class="search">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input id="search" type="search" placeholder="Search lesson  ( / )" autocomplete="off" aria-label="Search this lesson">
+          <span class="search__count" id="searchCount"></span>
+        </label>
+        <a class="icon-btn" id="ghLink" href="#" target="_blank" rel="noopener" aria-label="View on GitHub">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8 0 3.2.9.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"/></svg>
+        </a>
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle dark mode">
+          <svg class="i-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="side" id="side" aria-label="Lesson contents">
+      <div class="side__progress">
+        <div class="side__progress-top"><span id="progText">Loading…</span><b id="progPct">0%</b></div>
+        <div class="meter"><span id="progBar"></span></div>
+        <button class="reset" id="resetProg" type="button">Reset progress</button>
+      </div>
+      <ul class="toc" id="toc"></ul>
+    </aside>
+    <main class="main">
+      <div class="content">
+        <section class="hero" id="hero"></section>
+        <article id="content"><p class="loading">Loading lesson…</p></article>
+        <footer class="footer">
+          <span>Created by <a href="../">Vinu Manikandan</a></span>
+          <a id="ghLink2" href="#" target="_blank" rel="noopener">Source &amp; slides on GitHub ↗</a>
+        </footer>
+      </div>
+    </main>
+  </div>
+  <div class="scrim" id="scrim"></div>
+  <div class="lightbox" id="lightbox"><img alt=""></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="course/config.js"></script>
+  <script>
+    document.getElementById("ghLink").href = COURSE.repo;
+    document.getElementById("ghLink2").href = COURSE.repo;
+  </script>
+  <script src="course/course.js"></script>
+</body>
+</html>
